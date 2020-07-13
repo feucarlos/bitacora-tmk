@@ -1,0 +1,45 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar>
+        <ion-title>Faltas</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-list>
+        <!-- Multi-line sliding item with icon options on both sides -->
+        <ion-item-sliding *ngFor="let item of bitacora.faltas">
+            <ion-item>
+                <ion-label>
+                    <h2 *ngIf="item.desc">{{ item.desc }}</h2>
+                    <p>{{ item.fecha | date }}</p>
+                </ion-label>
+                <!-- <ion-note slot="end">
+                    10:45 AM
+                </ion-note> -->
+            </ion-item>
+
+            <ion-item-options side="start">
+                <ion-item-option color="danger">
+                    <ion-icon slot="icon-only" name="trash" (click)="borrarFalta( item )">
+                    </ion-icon>
+                </ion-item-option>
+            </ion-item-options>
+
+            <ion-item-options side="end">
+                <ion-item-option color="secondary">
+                    <ion-icon slot="icon-only" name="create-outline" (click)="editarFalta(item)">
+                    </ion-icon>
+                </ion-item-option>
+            </ion-item-options>
+        </ion-item-sliding>
+
+    </ion-list>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="agregarFalta()">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+</ion-content>

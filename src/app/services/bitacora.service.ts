@@ -10,9 +10,11 @@ export class BitacoraService {
 
   constructor() { }
 
-  agregarFalta(year: number, mounth: number, day: number, desc?: string){
-    const falta = new FaltaItem(year, mounth, day, desc);
-    this.faltas.push( falta );
-    console.log(falta);
+  agregarFalta(fecha: string, desc?: string) {
+    const fhl = new Date( fecha );
+    fhl.setTime( fhl.getTime() + fhl.getTimezoneOffset() * 60 * 1000 );
+    const falta = new FaltaItem(fhl, desc);
+    this.faltas.push(falta);
+    console.log(this.faltas);
   }
 }

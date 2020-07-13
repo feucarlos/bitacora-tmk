@@ -6,7 +6,11 @@ const routes: Routes = [
   {
     path: '',
     component: Tab2Page,
+  },  {
+    path: 'faltas',
+    loadChildren: () => import('../faltas/faltas.module').then( m => m.FaltasPageModule)
   }
+
 ];
 
 @NgModule({

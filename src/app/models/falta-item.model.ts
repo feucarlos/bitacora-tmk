@@ -3,11 +3,9 @@ export class FaltaItem {
     desc?: string;
     fecha: Date;
 
-    constructor(year: number,
-                month: number,
-                day: number,
+    constructor(fecha: Date,
                 desc?: string){
-        this.fecha = new Date(year, month, day);
+        this.fecha = fecha;
         if (desc) {
             this.desc = desc;
         }
