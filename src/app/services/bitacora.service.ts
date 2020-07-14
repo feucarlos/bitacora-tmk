@@ -19,7 +19,6 @@ export class BitacoraService {
       this.faltas = [];
     }
     console.log(this.faltas);
-    
   }
 
   saveStorage(){
@@ -31,6 +30,11 @@ export class BitacoraService {
     fhl.setTime( fhl.getTime() + fhl.getTimezoneOffset() * 60 * 1000 );
     const falta = new FaltaItem(fhl, desc);
     this.faltas.push(falta);
+    this.saveStorage();
+  }
+
+  borrarFalta(falta: FaltaItem){
+    this.faltas =  this.faltas.filter( listaData => listaData.id !== falta.id);
     this.saveStorage();
   }
 }

@@ -51,7 +51,7 @@ export class FaltasPage implements OnInit {
   }
 
   borrarFalta(item: FaltaItem) {
-    console.log(`Borrando ${item.id}`);
+    this.bitacora.borrarFalta( item);
   }
 
   async editarFalta(item: FaltaItem) {
