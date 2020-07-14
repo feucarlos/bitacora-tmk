@@ -9,7 +9,12 @@ const routes: Routes = [
   },  {
     path: 'faltas',
     loadChildren: () => import('../faltas/faltas.module').then( m => m.FaltasPageModule)
+  },
+  {
+    path: 'firma-desfirma',
+    loadChildren: () => import('../firma-desfirma/firma-desfirma.module').then( m => m.FirmaDesfirmaPageModule)
   }
+
 
 ];
 
