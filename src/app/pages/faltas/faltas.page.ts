@@ -49,6 +49,7 @@ export class FaltasPage implements OnInit {
     });
     await alert.present();
   }
+
   borrarFalta(item: FaltaItem) {
     console.log(`Borrando ${item.id}`);
   }
@@ -74,6 +75,7 @@ export class FaltasPage implements OnInit {
         handler: (data) => {
           if( !data.desc ) { return; }
           item.desc = data.desc;
+          this.bitacora.saveStorage();
         }
       }
       ]
