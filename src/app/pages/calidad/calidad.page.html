@@ -9,9 +9,35 @@
 
 <ion-content>
 
+
     <ion-list>
 
+        <ion-item-sliding *ngFor="let item of bitacora.calidadLista">
+            <ion-item class="animated FadeInDown">
+                <ion-label>
+                    <h2 *ngIf="item.desc">{{ item.desc }}</h2>
+                    <p>{{ item.fecha | date }} - Calificación: {{ item.calificacion }}</p>
+                </ion-label>
+            </ion-item>
+
+            <ion-item-options side="start">
+                <ion-item-option color="danger">
+                    <ion-icon slot="icon-only" name="trash" (click)="borrarCalidad( item )">
+                    </ion-icon>
+                </ion-item-option>
+            </ion-item-options>
+
+            <ion-item-options side="end">
+                <ion-item-option color="secondary">
+                    <ion-icon slot="icon-only" name="create-outline" (click)="editarCalidad(item)">
+                    </ion-icon>
+                </ion-item-option>
+            </ion-item-options>
+        </ion-item-sliding>
+
     </ion-list>
+
+
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
         <ion-fab-button (click)="agregarCalificacion()">
             <ion-icon name="add"></ion-icon>

@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BitacoraService } from '../../services/bitacora.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, IonList } from '@ionic/angular';
 import { FaltaItem } from '../../models/falta-item.model';
 
 @Component({
@@ -9,6 +9,7 @@ import { FaltaItem } from '../../models/falta-item.model';
   styleUrls: ['./faltas.page.scss'],
 })
 export class FaltasPage implements OnInit {
+  @ViewChild ( IonList ) lista: IonList;
 
   constructor(public bitacora: BitacoraService,
               private alertController: AlertController) {
@@ -75,7 +76,8 @@ export class FaltasPage implements OnInit {
         handler: (data) => {
           if( !data.desc ) { return; }
           item.desc = data.desc;
-          this.bitacora.saveStorage();
+          this.bitacora.saveStorage('faltas');
+          this.lista.closeSlidingItems();
         }
       }
       ]
