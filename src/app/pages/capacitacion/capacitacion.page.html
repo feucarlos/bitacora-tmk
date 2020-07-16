@@ -9,11 +9,41 @@
 </ion-header>
 
 <ion-content>
+
     <ion-list>
 
+        <ion-item-sliding *ngFor="let item of bitacora.capacitacion">
+            <ion-item class="animated FadeInDown">
+                <ion-label>
+                    <h2 *ngIf="item.desc">{{ item.desc }}</h2>
+                    <p>{{ item.fecha | date }}</p>
+                    <p>Horario de {{ item.hInicio }} a {{ item.hFinal }}</p>
+                </ion-label>
+                <ion-note slot="end">Duración
+                    <br>{{ item.hFinal - item.hInicio }}
+                </ion-note>
+            </ion-item>
+
+            <ion-item-options side="start">
+                <ion-item-option color="danger">
+                    <ion-icon slot="icon-only" name="trash" (click)="borrarCapa( item )">
+                    </ion-icon>
+                </ion-item-option>
+            </ion-item-options>
+
+            <ion-item-options side="end">
+                <ion-item-option color="secondary">
+                    <ion-icon slot="icon-only" name="create-outline" (click)="editarCapa(item)">
+                    </ion-icon>
+                </ion-item-option>
+            </ion-item-options>
+        </ion-item-sliding>
+
     </ion-list>
+
+
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button (click)="agregarCapa()">
+        <ion-fab-button (click)="agregarCapaAlert()">
             <ion-icon name="add"></ion-icon>
         </ion-fab-button>
     </ion-fab>
