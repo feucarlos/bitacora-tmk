@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { CapacitacionPageRoutingModule } from './capacitacion-routing.module';
 
 import { CapacitacionPage } from './capacitacion.page';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CapacitacionPageRoutingModule
+    CapacitacionPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [CapacitacionPage]
 })

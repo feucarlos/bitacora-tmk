@@ -8,5 +8,6 @@ import { BitacoraService } from '../../services/bitacora.service';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
+  mensaje = 3695;
   constructor( public bitacora: BitacoraService ) {}
 }
