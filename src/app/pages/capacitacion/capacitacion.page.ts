@@ -10,7 +10,7 @@ import { AlertController, IonList } from '@ionic/angular';
 })
 export class CapacitacionPage implements OnInit {
   
-  @ViewChild( IonList ) lista: IonList;
+  @ViewChild( IonList ) listaItem: IonList;
 
   constructor(public bitacora: BitacoraService,
               public alertController: AlertController) { }
@@ -64,12 +64,18 @@ export class CapacitacionPage implements OnInit {
   }
 
   agregarCapa( fecha: string, hInicio: string, hFinal: string, desc?: string ){
+    let error = false;
     const nFecha = new Date( fecha );
     nFecha.setTime( nFecha.getTime() + nFecha.getTimezoneOffset() * 60 * 1000 );
     const capa = new CapaItem(nFecha, hInicio, hFinal, desc);
-    // TODO Agregar método de verificación de capacitaciones no empalmadas
-    // y asegurar que la hora de inicio y final correspondan una antes que otra
-    this.bitacora.agregarCapa( capa );
+    if ( capa.hInicio >= capa.hFinal ) {
+      error = true;
+      this.bitacora.presentToast('Error en hora de inicio y hora final');
+    }
+    error = this.superpone( capa );
+    if ( !error ) {
+      this.bitacora.agregarCapa( capa );
+    }
   }
 
   borrarCapa( item: CapaItem ){
@@ -98,7 +104,7 @@ export class CapacitacionPage implements OnInit {
           if ( !data.desc ) { return; }
           item.desc = data.desc;
           this.bitacora.saveStorage( 'capacitacion' );
-          this.lista.closeSlidingItems();
+          this.listaItem.closeSlidingItems();
         }
       }
       ]
@@ -106,5 +112,20 @@ export class CapacitacionPage implements OnInit {
     await alert.present();
   }
 
+  superpone( capa: CapaItem ): boolean {
+    for  ( const item of this.bitacora.capacitacion ){
+      if ( capa.ymd === item.ymd ){
+        if ( capa.hInicio >= item.hInicio && capa.hInicio <= item.hFinal) {
+          this.bitacora.presentToast('Inicio coincide con en intervalo de otro registro');
+          return true;
+        }
+        if ( capa.hFinal >= item.hInicio && capa.hFinal <= item.hFinal ){
+          this.bitacora.presentToast('Final coincide con en intervalo de otro registro');
+          return true;
+        }
+      }
+    }
+    return false;
+  }
 
 }

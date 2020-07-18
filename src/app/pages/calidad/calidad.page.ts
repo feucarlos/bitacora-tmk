@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { CalidadItem } from '../../models/calidad-item.model';
 import { AlertController, IonList } from '@ionic/angular';
 import { BitacoraService } from '../../services/bitacora.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-calidad',
@@ -10,10 +11,11 @@ import { BitacoraService } from '../../services/bitacora.service';
 })
 export class CalidadPage implements OnInit {
 
-  @ViewChild( IonList ) lista: IonList;
+  @ViewChild( IonList ) listaItem: IonList;
 
   constructor( public bitacora: BitacoraService,
-               public alertController: AlertController) {}
+               public alertController: AlertController,
+               public route: Router) {}
 
   ngOnInit() {
   }
@@ -64,33 +66,8 @@ export class CalidadPage implements OnInit {
   }
 
   async editarCalidad(item: CalidadItem) {
-    const alert = await this.alertController.create({
-      header: 'Editar descripción',
-      inputs: [
-        {
-          name: 'desc',
-          type: 'text',
-          value: item.desc,
-          placeholder: 'Descripción (opcional)'
-        }
-        ],
-      buttons: [
-      {
-        text: 'Cancelar',
-        role: 'cancel'
-      },
-      {
-        text: 'Aceptar',
-        handler: (data) => {
-          if ( !data.desc ) { return; }
-          item.desc = data.desc;
-          this.bitacora.saveStorage( 'calidad' );
-          this.lista.closeSlidingItems();
-        }
-      }
-      ]
-    });
-    await alert.present();
+    this.listaItem.closeSlidingItems();
+    this.route.navigate( ['/tabs/tab2/editar-item', 'editar', item.id] );
   }
 
   validaCalidad(fecha: Date, calificacion: number, desc: string ){
@@ -105,5 +82,10 @@ export class CalidadPage implements OnInit {
     this.bitacora.calidadLista.sort( (a, b) => a.ymd - b.ymd );
     this.bitacora.saveStorage('calidad');
 
+  }
+
+  verDesc( item: CalidadItem ){
+    if ( !item.desc ){ return; }
+    this.route.navigate( ['/tabs/tab2/editar-item', 'ver', item.id] );
   }
 }

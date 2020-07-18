@@ -87,4 +87,9 @@ export class BitacoraService {
     toast.present();
   }
 
+  obtenerLista( lista: string, id: number ){
+    if (lista === 'calidad'){
+      return this.calidadLista.find( listaData => listaData.id === id);
+    }
+  };
 }
