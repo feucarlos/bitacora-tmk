@@ -79,9 +79,6 @@ export class CalidadPage implements OnInit {
       return;
     }
     this.bitacora.agregarCalidad( nFecha, calificacion, desc);
-    this.bitacora.calidadLista.sort( (a, b) => a.ymd - b.ymd );
-    this.bitacora.saveStorage('calidad');
-
   }
 
   verDesc( item: CalidadItem ){

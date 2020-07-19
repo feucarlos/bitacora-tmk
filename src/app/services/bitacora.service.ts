@@ -104,6 +104,8 @@ export class BitacoraService {
   agregarCalidad(fecha: Date, calificacion: number, desc: string){
     const tmp =  new CalidadItem(fecha, calificacion, desc);
     this.calidadLista.push(tmp);
+    this.calidadLista.sort( (a, b) => a.ymd - b.ymd );
+    this.saveStorage('calidad');
   }
   borrarCalidad(calidad: CalidadItem){
     this.calidadLista =  this.calidadLista.filter( listaData => listaData.id !== calidad.id);
@@ -111,6 +113,7 @@ export class BitacoraService {
   }
   agregarCapa( capa: CapaItem ){
     this.capacitacion.push( capa );
+    this.capacitacion.sort( (a, b) => a.ymd - b.ymd );
     this.saveStorage( 'capacitacion' );
   }
   borrarCapa(capa: CapaItem){
@@ -119,6 +122,7 @@ export class BitacoraService {
   }
   agregarDescanso( descanso: DescansoItem ){
     this.descansos.push( descanso );
+    this.descansos.sort( (a, b) => a.ymd - b.ymd );
     this.saveStorage( 'descansos' );
   }
   borrarDescanso(descanso: DescansoItem){
@@ -127,6 +131,7 @@ export class BitacoraService {
   }
   agregarfallaHomeOffice( fallaHomeOffice: FallaHomeOfficeItem ){
     this.fallasHomeOffice.push( fallaHomeOffice );
+    this.fallasHomeOffice.sort( (a, b) => a.ymd - b.ymd );
     this.saveStorage( 'fallasHomeOffice' );
   }
   borrarFallaHomeOffice(fallaHomeOffice: FallaHomeOfficeItem){
@@ -135,6 +140,7 @@ export class BitacoraService {
   }
   agregarFirmaDesfirmas( firmaDesfirma: FirmaDesfirmaItem ){
     this.firmaDesfirmas.push( firmaDesfirma );
+    this.firmaDesfirmas.sort( (a, b) => a.ymd - b.ymd );
     this.saveStorage( 'firmaDesfirmas' );
   }
   borrarFirmaDesfirmaItem(firmaDesfirma: FirmaDesfirmaItem){
@@ -143,6 +149,7 @@ export class BitacoraService {
   }
   agregarIncapacidad( incapacidad: IncapacidadItem ){
     this.incapacidades.push( incapacidad );
+    this.incapacidades.sort( (a, b) => a.ymd - b.ymd );
     this.saveStorage( 'incapacidades' );
   }
   borrarincapacidad(descanso: DescansoItem){
@@ -151,6 +158,7 @@ export class BitacoraService {
   }
   agregarVaca( vaca: VacacionesItem ){
     this.vacaciones.push( vaca );
+    this.vacaciones.sort( (a, b) => a.ymd - b.ymd );
     this.saveStorage( 'vacaciones' );
   }
   borrarVaca(vaca: VacacionesItem){
@@ -174,6 +182,17 @@ export class BitacoraService {
     if (lista === 'descansos'){
       return this.descansos.find( listaData => listaData.id === id);
     }
+  }
 
-  };
+  buscaSemanaOcupada(inicio: number, final: number){
+    for (const item of this.descansos){
+      if ( item.time >= inicio && item.time <= final ) {
+        this.presentToast('Ya hay un descanso asignado para esta semana')
+        return true;
+      }
+    }
+
+    return false;
+  }
+
 }
