@@ -1,9 +1,9 @@
-export class IncapacidaesItem{
+export class IncapacidadItem{
     id: number;
     desc: string;
     fecha: Date;
     ymd: number;
-    
+
     constructor(fecha: Date, desc?: string ) {
         this.id = new Date().getTime();
         if ( desc ) { this.desc = desc; };
