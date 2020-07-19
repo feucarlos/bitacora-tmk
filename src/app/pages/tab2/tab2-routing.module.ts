@@ -39,7 +39,7 @@ const routes: Routes = [
     loadChildren: () => import('../descansos/descansos.module').then( m => m.DescansosPageModule)
   },
   {
-    path: 'editar-item/:do/:id',
+    path: ':seccion/:do/:id',
     loadChildren: () => import('../editar-item/editar-item.module').then( m => m.EditarItemPageModule)
   }
 ];

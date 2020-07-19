@@ -13,8 +13,9 @@ export class EditarItemPage implements OnInit {
 
   accion = '';
   id: number;
-  calidad: CalidadItem;
+  item: any;
   accionIco = '';
+  seccion = '';
   desc: string;
 
   constructor(public bitacora: BitacoraService,
@@ -29,17 +30,18 @@ export class EditarItemPage implements OnInit {
       this.accionIco = 'create-outline';
     }
 
+    this.seccion = this.route.snapshot.paramMap.get('seccion');
     this.id = Number(this.route.snapshot.paramMap.get('id'));
-    this.calidad = this.bitacora.obtenerLista( 'calidad', this.id);
-    this.desc = this.calidad.desc;
+    this.item = this.bitacora.obtenerLista( this.seccion, this.id);
+    this.desc = this.item.desc;
   }
 
   ngOnInit() {
   }
 
   saveChanges(){
-    this.calidad.desc = this.desc;
-    this.bitacora.saveStorage('calidad');
+    this.item.desc = this.desc;
+    this.bitacora.saveStorage( this.seccion );
     this.bitacora.presentToast('Descripción actualizada');
   }
 

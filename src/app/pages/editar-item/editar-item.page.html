@@ -3,7 +3,7 @@
         <ion-buttons slot="start">
             <ion-back-button defaultHref="/tabs/tab2"></ion-back-button>
         </ion-buttons>
-        <ion-title>Calidad - {{ accion | titlecase }}</ion-title>
+        <ion-title>{{ seccion | titlecase }} - {{ accion | titlecase }}</ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -13,24 +13,18 @@
         <ion-item>
             <ion-icon name="{{ accionIco }}" slot="start"></ion-icon>
             <ion-label>Descripción</ion-label>
-            <ion-button fill="outline" slot="end" (click)="saveChanges()" *ngIf="accion==='editar'">Guardar</ion-button>
+            <ion-button fill="outline" slot="end" (click)="saveChanges( )" *ngIf="accion==='editar'">Guardar</ion-button>
         </ion-item>
 
-        <!-- <ion-card-content *ngIf="accion === 'ver'">
-            {{ calidad.desc }}
-        </ion-card-content> -->
         <ion-card-content *ngIf="accion === 'ver'">
-            <ion-textarea value="{{ calidad.desc }}" autoGrow="true" [(ngModel)]="desc" readonly="true">
-            </ion-textarea>
+            <ion-textarea value="{{ item.desc }}" autoGrow="true" [(ngModel)]="desc" readonly="true" *ngIf="seccion === 'calidad'"></ion-textarea>
+            <ion-input value="{{item.desc}}" *ngIf="seccion != 'calidad'"></ion-input>
         </ion-card-content>
 
         <ion-card-content *ngIf="accion === 'editar'">
-            <ion-textarea value="{{ calidad.desc }}" autoGrow="true" [(ngModel)]="desc" placeholder="Agregar descripción">
-            </ion-textarea>
+            <ion-textarea value="{{ item.desc }}" autoGrow="true" [(ngModel)]="desc" placeholder="Agregar descripción"></ion-textarea>
         </ion-card-content>
 
-
     </ion-card>
-
 
 </ion-content>
