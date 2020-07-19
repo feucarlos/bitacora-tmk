@@ -9,11 +9,38 @@
 </ion-header>
 
 <ion-content>
+
     <ion-list>
 
+        <ion-item-sliding *ngFor="let item of bitacora.descansos">
+            <ion-item class="animated FadeInDown" detail>
+                <ion-label>
+                    <h2>{{ item.fecha | date:'fullDate' }}</h2>
+                </ion-label>
+                <ion-note slot="end" *ngIf="item.cincoXdos">5x2
+                    <ion-icon name="checkmark"></ion-icon>
+                </ion-note>
+            </ion-item>
+
+            <ion-item-options side="start">
+                <ion-item-option color="danger">
+                    <ion-icon slot="icon-only" name="trash" (click)="borrarDescanso( item )">
+                    </ion-icon>
+                </ion-item-option>
+            </ion-item-options>
+
+            <ion-item-options side="end">
+                <ion-item-option color="secondary">
+                    <ion-icon slot="icon-only" name="create-outline" (click)="editarDescanso(item)">
+                    </ion-icon>
+                </ion-item-option>
+            </ion-item-options>
+        </ion-item-sliding>
+
     </ion-list>
+
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button (click)="agregarDescanso()">
+        <ion-fab-button (click)="agregarDescansoAlert()">
             <ion-icon name="add"></ion-icon>
         </ion-fab-button>
     </ion-fab>

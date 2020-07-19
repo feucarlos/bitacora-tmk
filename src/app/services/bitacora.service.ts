@@ -30,49 +30,49 @@ export class BitacoraService {
   }
 
   loadStorage(){
-    if( localStorage.getItem('faltas') ){
-      this.faltas = JSON.parse(localStorage.getItem('faltas'))
+    if ( localStorage.getItem('faltas') ){
+      this.faltas = JSON.parse(localStorage.getItem('faltas'));
     } else { this.faltas = []; }
 
-    if( localStorage.getItem('calidad') ){
-      this.calidadLista = JSON.parse(localStorage.getItem('calidad'))
+    if ( localStorage.getItem('calidad') ){
+      this.calidadLista = JSON.parse(localStorage.getItem('calidad'));
     } else { this.calidadLista = []; }
 
-    if( localStorage.getItem('capacitacion') ){
-      this.capacitacion = JSON.parse(localStorage.getItem('capacitacion'))
+    if ( localStorage.getItem('capacitacion') ){
+      this.capacitacion = JSON.parse(localStorage.getItem('capacitacion'));
     } else { this.capacitacion = []; }
 
-    if( localStorage.getItem('descansos') ){
-      this.descansos = JSON.parse(localStorage.getItem('descansos'))
+    if ( localStorage.getItem('descansos') ){
+      this.descansos = JSON.parse(localStorage.getItem('descansos'));
     } else { this.descansos = []; }
 
-    if( localStorage.getItem('fallasHomeOffice') ){
-      this.fallasHomeOffice = JSON.parse(localStorage.getItem('fallasHomeOffice'))
+    if ( localStorage.getItem('fallasHomeOffice') ){
+      this.fallasHomeOffice = JSON.parse(localStorage.getItem('fallasHomeOffice'));
     } else { this.fallasHomeOffice = []; }
 
-    if( localStorage.getItem('firmaDesfirmas') ){
-      this.firmaDesfirmas = JSON.parse(localStorage.getItem('firmaDesfirmas'))
+    if ( localStorage.getItem('firmaDesfirmas') ){
+      this.firmaDesfirmas = JSON.parse(localStorage.getItem('firmaDesfirmas'));
     } else { this.firmaDesfirmas = []; }
 
-    if( localStorage.getItem('incapacidades') ){
-      this.incapacidades = JSON.parse(localStorage.getItem('incapacidades'))
+    if ( localStorage.getItem('incapacidades') ){
+      this.incapacidades = JSON.parse(localStorage.getItem('incapacidades'));
     } else { this.incapacidades = []; }
 
-    if( localStorage.getItem('vacaciones') ){
-      this.vacaciones = JSON.parse(localStorage.getItem('vacaciones'))
+    if ( localStorage.getItem('vacaciones') ){
+      this.vacaciones = JSON.parse(localStorage.getItem('vacaciones'));
     } else { this.vacaciones = []; }
 }
 
   saveStorage(key: string){
     // TODO: cambiar a switch cuando esten todas las opciones
-    if (key === 'faltas') { localStorage.setItem('faltas', JSON.stringify(this.faltas)); };
-    if (key === 'calidad') { localStorage.setItem('calidad', JSON.stringify(this.calidadLista)); };
-    if (key === 'capacitacion') { localStorage.setItem('capacitacion', JSON.stringify(this.capacitacion)); };
-    if (key === 'descansos') { localStorage.setItem('descansos', JSON.stringify(this.descansos)); };
-    if (key === 'fallasHomeOffice') { localStorage.setItem('fallasHomeOffice', JSON.stringify(this.fallasHomeOffice)); };
-    if (key === 'firmaDesfirmas') { localStorage.setItem('firmaDesfirmas', JSON.stringify(this.firmaDesfirmas)); };
-    if (key === 'incapacidades') { localStorage.setItem('incapacidades', JSON.stringify(this.incapacidades)); };
-    if (key === 'vacaciones') { localStorage.setItem('vacaciones', JSON.stringify(this.vacaciones)); };
+    if (key === 'faltas') { localStorage.setItem('faltas', JSON.stringify(this.faltas)); }
+    if (key === 'calidad') { localStorage.setItem('calidad', JSON.stringify(this.calidadLista)); }
+    if (key === 'capacitacion') { localStorage.setItem('capacitacion', JSON.stringify(this.capacitacion)); }
+    if (key === 'descansos') { localStorage.setItem('descansos', JSON.stringify(this.descansos)); }
+    if (key === 'fallasHomeOffice') { localStorage.setItem('fallasHomeOffice', JSON.stringify(this.fallasHomeOffice)); }
+    if (key === 'firmaDesfirmas') { localStorage.setItem('firmaDesfirmas', JSON.stringify(this.firmaDesfirmas)); }
+    if (key === 'incapacidades') { localStorage.setItem('incapacidades', JSON.stringify(this.incapacidades)); }
+    if (key === 'vacaciones') { localStorage.setItem('vacaciones', JSON.stringify(this.vacaciones)); }
   }
 
   // TODO Homologar funciones que reciban como argumento el modelo
@@ -187,7 +187,7 @@ export class BitacoraService {
   buscaSemanaOcupada(inicio: number, final: number){
     for (const item of this.descansos){
       if ( item.time >= inicio && item.time <= final ) {
-        this.presentToast('Ya hay un descanso asignado para esta semana')
+        this.presentToast('Ya hay un descanso asignado para esta semana');
         return true;
       }
     }

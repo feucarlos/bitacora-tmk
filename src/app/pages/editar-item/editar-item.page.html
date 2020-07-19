@@ -3,7 +3,8 @@
         <ion-buttons slot="start">
             <ion-back-button defaultHref="/tabs/tab2"></ion-back-button>
         </ion-buttons>
-        <ion-title>{{ seccion | titlecase }} - {{ accion | titlecase }}</ion-title>
+        <ion-title *ngIf="seccion==='calidad'">{{ seccion | titlecase }} - {{ accion | titlecase }}</ion-title>
+        <!-- <ion-title *ngIf="seccion==='descansos'">{{ item.fecha | date: 'fullDate'}}</ion-title> -->
     </ion-toolbar>
 </ion-header>
 
@@ -12,12 +13,13 @@
     <ion-card>
         <ion-item>
             <ion-icon name="{{ accionIco }}" slot="start"></ion-icon>
-            <ion-label>Descripción</ion-label>
+            <ion-label>Editar descripción</ion-label>
             <ion-button fill="outline" slot="end" (click)="saveChanges( )" *ngIf="accion==='editar'">Guardar</ion-button>
         </ion-item>
 
         <ion-card-content *ngIf="accion === 'ver'">
             <ion-textarea value="{{ item.desc }}" autoGrow="true" [(ngModel)]="desc" readonly="true" *ngIf="seccion === 'calidad'"></ion-textarea>
+            <ion-checkbox></ion-checkbox>
             <ion-input value="{{item.desc}}" *ngIf="seccion != 'calidad'"></ion-input>
         </ion-card-content>
 
