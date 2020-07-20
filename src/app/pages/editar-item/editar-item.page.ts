@@ -41,6 +41,9 @@ export class EditarItemPage implements OnInit {
 
   saveChanges(){
     this.item.desc = this.desc;
+    if ( this.desc.length === 0 ){
+      this.item.withDes = false;
+    }
     this.bitacora.saveStorage( this.seccion );
     this.bitacora.presentToast('Descripción actualizada');
   }

@@ -9,16 +9,12 @@
 
 <ion-content>
 
-
     <ion-list>
 
         <ion-item-sliding *ngFor="let item of bitacora.calidadLista">
             <ion-item class="animated FadeInDown" (click)="verDesc(item)">
-
                 Calificación: <strong>{{ item.calificacion }} </strong>
                 <ion-note slot="end"> {{ item.fecha | date }} </ion-note>
-                <!-- <div *ngIf="item.desc">{{ item.desc }}</div> -->
-
             </ion-item>
 
             <ion-item-options side="start">
