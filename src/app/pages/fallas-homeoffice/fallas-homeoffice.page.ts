@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BitacoraService } from '../../services/bitacora.service';
 
 @Component({
   selector: 'app-fallas-homeoffice',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FallasHomeofficePage implements OnInit {
 
-  constructor() { }
+  constructor(public bitacora: BitacoraService) { }
 
   ngOnInit() {
   }

@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: FallasHomeofficePage
+  },
+  {
+    path: 'registro',
+    loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
   }
 ];
 

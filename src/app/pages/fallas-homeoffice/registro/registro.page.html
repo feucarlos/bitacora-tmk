@@ -1,0 +1,60 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/tabs/tab2/fallas-homeoffice"></ion-back-button>
+        </ion-buttons>
+
+        <ion-title>Home Office - Registro</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-list lines="full">
+        <ion-item>
+            <ion-label>Fecha</ion-label>
+
+            <ion-datetime value="{{ fecha }}" placeholder="Select Date"></ion-datetime>
+        </ion-item>
+
+
+        <ion-radio-group [(ngModel)]="ubicacion">
+            <ion-list-header>
+                <ion-label>Falla en:</ion-label>
+            </ion-list-header>
+
+            <ion-item>
+                <ion-label>Casa</ion-label>
+                <ion-radio slot="start" value="Casa"></ion-radio>
+            </ion-item>
+
+            <ion-item>
+                <ion-label>Tec</ion-label>
+                <ion-radio slot="start" value="Tec"></ion-radio>
+            </ion-item>
+        </ion-radio-group>
+
+        <ion-item>
+            <ion-label>Hora de inicio</ion-label>
+            <ion-input [(ngModel)]="hInicio" type="time" slot="end"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Hora de finalización</ion-label>
+            <ion-input [(ngModel)]="hFinal" type="time" slot="end"></ion-input>
+        </ion-item>
+
+
+        <div class="ion-padding">
+            <p class="ion-padding">Descripción:</p>
+            <ion-textarea [(ngModel)]="desc" autoGrow="true" placeholder="Describe la falla (luz, internet, Avaya...)"></ion-textarea>
+        </div>
+
+    </ion-list>
+
+    <div class="ion-padding">
+        <ion-button expand="block" (click)="agregarFalla()">Registrar falla</ion-button>
+    </div>
+
+
+
+</ion-content>
