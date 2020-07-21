@@ -3,7 +3,7 @@
         <ion-buttons slot="start">
             <ion-back-button defaultHref="/tabs/tab2"></ion-back-button>
         </ion-buttons>
-        <ion-title>{{ seccion | titlecase }} - {{ accion | titlecase }}</ion-title>
+        <ion-title>{{ accion | titlecase }} calidad</ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -17,12 +17,11 @@
         </ion-item>
 
         <ion-card-content *ngIf="accion === 'ver'">
-            <ion-textarea value="{{ item.desc }}" autoGrow="true" [(ngModel)]="desc" readonly="true" *ngIf="seccion === 'calidad'"></ion-textarea>
-            <ion-input value="{{item.desc}}" *ngIf="seccion != 'calidad'"></ion-input>
+            <ion-textarea value="{{ item.desc }}" autoGrow="true" [(ngModel)]="item.desc" readonly="true"></ion-textarea>
         </ion-card-content>
 
         <ion-card-content *ngIf="accion === 'editar'">
-            <ion-textarea value="{{ item.desc }}" autoGrow="true" [(ngModel)]="desc" placeholder="Agregar descripción"></ion-textarea>
+            <ion-textarea value="{{ item.desc }}" autoGrow="true" [(ngModel)]="item.desc" placeholder="Agregar descripción"></ion-textarea>
         </ion-card-content>
 
     </ion-card>

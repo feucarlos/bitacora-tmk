@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BitacoraService } from '../../services/bitacora.service';
 import { ActivatedRoute } from '@angular/router';
-import { CalidadItem } from '../../models/calidad-item.model';
-
 
 @Component({
   selector: 'app-editar-item',
@@ -15,8 +13,7 @@ export class EditarItemPage implements OnInit {
   id: number;
   item: any;
   accionIco = '';
-  seccion = '';
-  desc: string;
+  // desc: string;
 
   constructor(public bitacora: BitacoraService,
               public route: ActivatedRoute) {
@@ -30,21 +27,20 @@ export class EditarItemPage implements OnInit {
       this.accionIco = 'create-outline';
     }
 
-    this.seccion = this.route.snapshot.paramMap.get('seccion');
     this.id = Number(this.route.snapshot.paramMap.get('id'));
-    this.item = this.bitacora.obtenerLista( this.seccion, this.id);
-    this.desc = this.item.desc;
+    this.item = this.bitacora.obtenerLista( 'calidad', this.id);
+    // this.desc = this.item.desc;
   }
 
   ngOnInit() {
   }
 
   saveChanges(){
-    this.item.desc = this.desc;
-    if ( this.desc.length === 0 ){
+    // this.item.desc = this.desc;
+    if ( this.item.desc === '' ){
       this.item.withDes = false;
     }
-    this.bitacora.saveStorage( this.seccion );
+    this.bitacora.saveStorage( 'calidad' );
     this.bitacora.presentToast('Descripción actualizada');
   }
 
