@@ -28,7 +28,7 @@ export class EditarItemPage implements OnInit {
     }
 
     this.id = Number(this.route.snapshot.paramMap.get('id'));
-    this.item = this.bitacora.obtenerLista( 'calidad', this.id);
+    this.item = this.bitacora.calidadLista.find( listaData => listaData.id === this.id);
     // this.desc = this.item.desc;
   }
 

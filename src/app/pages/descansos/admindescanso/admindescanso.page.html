@@ -1,0 +1,25 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/tabs/tab2/descansos"></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{ item.fecha | date:"fullDate" }}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-card>
+        <ion-item>
+            <ion-icon [name]="ico" slot="start"></ion-icon>
+            <ion-label>Descripción</ion-label>
+            <ion-button *ngIf="!readonly" fill="outline" slot="end" (click)="saveChanges( )">Guardar</ion-button>
+        </ion-item>
+
+        <ion-card-content>
+            <ion-textarea value="{{ item.desc }}" [readonly]="readonly" autoGrow="true" [(ngModel)]="item.desc" placeholder="Agregar descripción"></ion-textarea>
+        </ion-card-content>
+
+    </ion-card>
+
+</ion-content>

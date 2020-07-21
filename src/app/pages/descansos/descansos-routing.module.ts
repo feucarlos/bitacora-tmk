@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: DescansosPage
+  },
+  {
+    path: ':do/:id',
+    loadChildren: () => import('./admindescanso/admindescanso.module').then( m => m.AdmindescansoPageModule)
   }
 ];
 

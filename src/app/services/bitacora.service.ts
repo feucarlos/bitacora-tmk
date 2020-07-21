@@ -175,15 +175,6 @@ export class BitacoraService {
     toast.present();
   }
 
-  obtenerLista( lista: string, id: number ){
-    if (lista === 'calidad'){
-      return this.calidadLista.find( listaData => listaData.id === id);
-    }
-    if (lista === 'descansos'){
-      return this.descansos.find( listaData => listaData.id === id);
-    }
-  }
-
   buscaSemanaOcupada(inicio: number, final: number){
     for (const item of this.descansos){
       if ( item.time >= inicio && item.time <= final ) {
@@ -191,7 +182,6 @@ export class BitacoraService {
         return true;
       }
     }
-
     return false;
   }
 

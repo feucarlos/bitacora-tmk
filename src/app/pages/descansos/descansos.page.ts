@@ -90,7 +90,13 @@ export class DescansosPage implements OnInit {
   }
 
   editarDescanso(item: DescansoItem) {
-  this.route.navigate( ['/tabs/tab2/', 'descansos', 'editar', item.id] );
+  this.route.navigate( ['/tabs/tab2/descansos', 'editar', item.id] );
   this.listaItem.closeSlidingItems();
   }
+
+  verItem(item: DescansoItem){
+    this.route.navigate(['/tabs/tab2/descansos', 'ver', item.id]);
+  }
 }
+
+
