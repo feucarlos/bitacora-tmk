@@ -15,6 +15,10 @@
             <ion-label>Descripción</ion-label>
             <ion-button *ngIf="!readonly" fill="outline" slot="end" (click)="saveChanges( )">Guardar</ion-button>
         </ion-item>
+        <ion-item>
+            <ion-label> Cinco x dos</ion-label>
+            <ion-checkbox [(ngModel)]="item.cincoXdos" slot="start" [disabled]="readonly"></ion-checkbox>
+        </ion-item>
 
         <ion-card-content>
             <ion-textarea value="{{ item.desc }}" [readonly]="readonly" autoGrow="true" [(ngModel)]="item.desc" placeholder="Agregar descripción"></ion-textarea>
