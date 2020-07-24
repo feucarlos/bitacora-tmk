@@ -11,9 +11,40 @@
 
 
 <ion-content>
+
+
     <ion-list>
 
+        <ion-item-sliding *ngFor="let item of bitacora.fallasHomeOffice">
+            <ion-item class="animated FadeInDown">
+                <ion-label>
+                    <h2 *ngIf="item.desc">{{ item.desc }}</h2>
+                    <p>{{ item.fecha | date }}</p>
+                    <p>Falla de {{ item.hInicio | horadeldia }} a {{ item.hFinal | horadeldia }}</p>
+                </ion-label>
+                <ion-note slot="end">Duración
+                    <br>{{ (item.hFinal - item.hInicio) | horadeldia }}
+                </ion-note>
+            </ion-item>
+
+            <ion-item-options side="start">
+                <ion-item-option color="danger">
+                    <ion-icon slot="icon-only" name="trash" (click)="borrarItem( item )">
+                    </ion-icon>
+                </ion-item-option>
+            </ion-item-options>
+
+            <ion-item-options side="end">
+                <ion-item-option color="secondary">
+                    <ion-icon slot="icon-only" name="create-outline" (click)="editarItem(item)">
+                    </ion-icon>
+                </ion-item-option>
+            </ion-item-options>
+        </ion-item-sliding>
+
     </ion-list>
+
+
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
         <ion-fab-button href="/tabs/tab2/fallas-homeoffice/registro">
             <ion-icon name="add"></ion-icon>

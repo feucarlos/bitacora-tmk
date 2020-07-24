@@ -8,8 +8,9 @@ export class FallaHomeOfficeItem{
     hFinal?: number;
     incidencia?: number;
 
-    constructor(fecha: Date, desc?: string, lugar?: string,
-                hInicio?: number, hFinal?: number, incidencia?: number ) {
+    constructor(fecha: Date, lugar: string,
+                hInicio?: number, hFinal?: number, 
+                desc?: string, incidencia?: number ) {
         this.id = new Date().getTime();
         this.fecha = fecha;
         this.desc = desc;

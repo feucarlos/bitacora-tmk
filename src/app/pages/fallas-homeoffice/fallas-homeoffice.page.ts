@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BitacoraService } from '../../services/bitacora.service';
+import { FallaHomeOfficeItem } from '../../models/falla-home-office-item.model';
 
 @Component({
   selector: 'app-fallas-homeoffice',
@@ -13,4 +14,7 @@ export class FallasHomeofficePage implements OnInit {
   ngOnInit() {
   }
 
+  borrarItem( item: FallaHomeOfficeItem ){
+    this.bitacora.borrarFallaHomeOffice( item );
+  }
 }

@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { FallasHomeofficePageRoutingModule } from './fallas-homeoffice-routing.module';
 
 import { FallasHomeofficePage } from './fallas-homeoffice.page';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FallasHomeofficePageRoutingModule
+    FallasHomeofficePageRoutingModule,
+    ComponentsModule
   ],
   declarations: [FallasHomeofficePage]
 })
