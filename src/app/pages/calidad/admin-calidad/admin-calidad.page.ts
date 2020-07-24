@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { BitacoraService } from '../../services/bitacora.service';
 import { ActivatedRoute } from '@angular/router';
+import { BitacoraService } from '../../../services/bitacora.service';
+
 
 @Component({
-  selector: 'app-editar-item',
-  templateUrl: './editar-item.page.html',
-  styleUrls: ['./editar-item.page.scss'],
+  selector: 'app-admin-calidad',
+  templateUrl: './admin-calidad.page.html',
+  styleUrls: ['./admin-calidad.page.scss'],
 })
-export class EditarItemPage implements OnInit {
+export class AdminCalidadPage implements OnInit {
 
   accion = '';
   id: number;

@@ -67,7 +67,7 @@ export class CalidadPage implements OnInit {
 
   async editarCalidad(item: CalidadItem) {
     this.listaItem.closeSlidingItems();
-    this.route.navigate( ['/tabs/tab2/', 'calidad', 'editar', item.id] );
+    this.route.navigate( ['/tabs/tab2/calidad', 'editar', item.id] );
   }
 
   validaCalidad(fecha: Date, calificacion: number, desc: string ){
@@ -83,6 +83,6 @@ export class CalidadPage implements OnInit {
 
   verDesc( item: CalidadItem ){
     if ( !item.desc ){ return; }
-    this.route.navigate( ['/tabs/tab2/', 'calidad', 'ver', item.id] );
+    this.route.navigate( ['/tabs/tab2/calidad', 'ver', item.id] );
   }
 }

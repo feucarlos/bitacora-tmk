@@ -7,7 +7,12 @@ const routes: Routes = [
   {
     path: '',
     component: CalidadPage
+  },
+  {
+    path: ':do/:id',
+    loadChildren: () => import('./admin-calidad/admin-calidad.module').then( m => m.AdminCalidadPageModule)
   }
+
 ];
 
 @NgModule({

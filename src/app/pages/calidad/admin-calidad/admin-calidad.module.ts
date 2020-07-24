@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { EditarItemPageRoutingModule } from './editar-item-routing.module';
+import { AdminCalidadPageRoutingModule } from './admin-calidad-routing.module';
 
-import { EditarItemPage } from './editar-item.page';
+import { AdminCalidadPage } from './admin-calidad.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    EditarItemPageRoutingModule
+    AdminCalidadPageRoutingModule
   ],
-  declarations: [EditarItemPage]
+  declarations: [AdminCalidadPage]
 })
-export class EditarItemPageModule {}
+export class AdminCalidadPageModule {}
