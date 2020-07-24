@@ -18,7 +18,7 @@
         <ion-item-sliding *ngFor="let item of bitacora.fallasHomeOffice">
             <ion-item class="animated FadeInDown">
                 <ion-label>
-                    <h2 *ngIf="item.desc">{{ item.desc }}</h2>
+                    <h2 *ngIf="item.desc">{{ item.desc | shortDesc }}</h2>
                     <p>{{ item.fecha | date }}</p>
                     <p>Falla de {{ item.hInicio | horadeldia }} a {{ item.hFinal | horadeldia }}</p>
                 </ion-label>

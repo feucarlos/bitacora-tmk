@@ -9,7 +9,7 @@ export class FallaHomeOfficeItem{
     incidencia?: number;
 
     constructor(fecha: Date, lugar: string,
-                hInicio?: number, hFinal?: number, 
+                hInicio?: number, hFinal?: number,
                 desc?: string, incidencia?: number ) {
         this.id = new Date().getTime();
         this.fecha = fecha;
