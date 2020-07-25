@@ -20,7 +20,7 @@
                     <p>Horario de {{ item.hInicio | horadeldia }} a {{ item.hFinal | horadeldia}}</p>
                 </ion-label>
                 <ion-note slot="end">Duración
-                    <br>{{ (item.hFinal - item.hInicio) | horadeldia }}
+                    <br>{{ (item.hFinal - item.hInicio) | duracion }}
                 </ion-note>
             </ion-item>
 

@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { CalidadPageRoutingModule } from './calidad-routing.module';
 
 import { CalidadPage } from './calidad.page';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CalidadPageRoutingModule
+    CalidadPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [CalidadPage]
 })

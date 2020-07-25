@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BitacoraService } from '../../../services/bitacora.service';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class AdminCalidadPage implements OnInit {
   // desc: string;
 
   constructor(public bitacora: BitacoraService,
-              public route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private location: Location) {
 
     this.accion = this.route.snapshot.paramMap.get('do');
     if ( this.accion === 'ver' ) {
@@ -30,7 +32,6 @@ export class AdminCalidadPage implements OnInit {
 
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.item = this.bitacora.calidadLista.find( listaData => listaData.id === this.id);
-    // this.desc = this.item.desc;
   }
 
   ngOnInit() {
@@ -43,6 +44,7 @@ export class AdminCalidadPage implements OnInit {
     }
     this.bitacora.saveStorage( 'calidad' );
     this.bitacora.presentToast('Descripción actualizada');
+    this.location.back();
   }
 
 }
