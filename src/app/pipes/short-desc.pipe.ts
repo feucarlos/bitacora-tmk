@@ -11,7 +11,7 @@ export class ShortDescPipe implements PipeTransform {
       return value;
     }
     const salto = value.indexOf('\n');
-    if (salto > 0 && salto <= 50){
+    if ( (salto > 0) && (salto <= 50) ){
       shortDesc = value.substr(0, salto);
       return shortDesc;
     }
@@ -19,7 +19,6 @@ export class ShortDescPipe implements PipeTransform {
     if ( value.length >= 50 || salto > 50) {
       shortDesc = value.substr(0, 50) + '...';
     }
-
     return shortDesc;
   }
 

@@ -9,7 +9,11 @@ const routes: Routes = [
     component: FallasHomeofficePage
   },
   {
-    path: 'registro',
+    path: ':do/:id',
+    loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
+  },
+  {
+    path: ':do',
     loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
   }
 ];

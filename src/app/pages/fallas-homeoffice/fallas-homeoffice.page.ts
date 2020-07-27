@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BitacoraService } from '../../services/bitacora.service';
 import { FallaHomeOfficeItem } from '../../models/falla-home-office-item.model';
+import { Router } from '@angular/router';
+import { IonList } from '@ionic/angular';
 
 @Component({
   selector: 'app-fallas-homeoffice',
@@ -9,12 +11,28 @@ import { FallaHomeOfficeItem } from '../../models/falla-home-office-item.model';
 })
 export class FallasHomeofficePage implements OnInit {
 
-  constructor(public bitacora: BitacoraService) { }
+  @ViewChild ( IonList ) listaItem: IonList;
+
+  constructor(public bitacora: BitacoraService,
+              private router: Router) { }
 
   ngOnInit() {
   }
 
   borrarItem( item: FallaHomeOfficeItem ){
     this.bitacora.borrarFallaHomeOffice( item );
+  }
+
+  nuevoItem(){
+    this.router.navigate(['/tabs/tab2/fallas-homeoffice', 'agregar'] );
+  }
+
+  verItem( item: FallaHomeOfficeItem ){
+    this.router.navigate(['/tabs/tab2/fallas-homeoffice', 'ver', item.id] );
+  }
+
+  editarItem( item: FallaHomeOfficeItem ){
+    this.router.navigate(['/tabs/tab2/fallas-homeoffice', 'editar', item.id] );
+    this.listaItem.closeSlidingItems();
   }
 }

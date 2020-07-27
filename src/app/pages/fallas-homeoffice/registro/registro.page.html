@@ -3,8 +3,8 @@
         <ion-buttons slot="start">
             <ion-back-button defaultHref="/tabs/tab2/fallas-homeoffice"></ion-back-button>
         </ion-buttons>
-
-        <ion-title>Home Office - Registro</ion-title>
+        <ion-icon name="{{ icon }}" slot="start"></ion-icon>
+        <ion-title>Falla Home Office</ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -13,46 +13,48 @@
     <ion-list lines="full">
         <ion-item>
             <ion-label>Fecha</ion-label>
-
-            <ion-datetime value="{{ fecha }}" placeholder="Select Date"></ion-datetime>
+            <ion-datetime [(ngModel)]="item.fecha" readonly="{{readonly}}" placeholder="Select Date" displayFormat="DDD. MMM DD, YYYY" dayShortNames="dom, lun, mar, mie, jue, vie, sab, dom" monthShortNames="ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic"></ion-datetime>
         </ion-item>
 
-
-        <ion-radio-group [(ngModel)]="ubicacion">
+        <ion-radio-group [(ngModel)]="item.lugar">
             <ion-list-header>
                 <ion-label>Falla en:</ion-label>
             </ion-list-header>
-
             <ion-item>
                 <ion-label>Casa</ion-label>
-                <ion-radio slot="start" value="Casa"></ion-radio>
+                <ion-radio slot="start" value="Casa" disabled="{{radioCasa}}"></ion-radio>
             </ion-item>
-
             <ion-item>
                 <ion-label>Tec</ion-label>
-                <ion-radio slot="start" value="Tec"></ion-radio>
+                <ion-radio slot="start" value="Tec" disabled="{{radioTec}}"></ion-radio>
             </ion-item>
         </ion-radio-group>
 
+
         <ion-item>
             <ion-label>Hora de inicio</ion-label>
-            <ion-input [(ngModel)]="hInicio" type="time" slot="end"></ion-input>
+            <ion-input [(ngModel)]="item.hInicio" readonly="{{readonly}}" type="time" slot="end"></ion-input>
         </ion-item>
+
         <ion-item>
             <ion-label>Hora de finalización</ion-label>
-            <ion-input [(ngModel)]="hFinal" type="time" slot="end"></ion-input>
+            <ion-input [(ngModel)]="item.hFinal" readonly="{{readonly}}" type="time" slot="end"></ion-input>
         </ion-item>
 
+        <ion-item>
+            <ion-label position="floating">Incidencia</ion-label>
+            <ion-input type="number" [(ngModel)]="item.incidencia" readonly="{{readonly}}"></ion-input>
+        </ion-item>
 
-        <div class="ion-padding">
-            <p class="ion-padding">Descripción:</p>
-            <ion-textarea [(ngModel)]="desc" autoGrow="true" placeholder="Describe la falla (luz, internet, Avaya...)"></ion-textarea>
-        </div>
+        <ion-item>
+            <ion-label position="floating">Descripción</ion-label>
+            <ion-textarea [(ngModel)]="item.desc" readonly="{{ readonly }}" autoGrow="true" placeholder="Describe la falla (luz, internet, Avaya...)" class="borde-sutil"></ion-textarea>
+        </ion-item>
 
     </ion-list>
 
-    <div class="ion-padding">
-        <ion-button expand="block" (click)="agregarFalla()">Registrar falla</ion-button>
+    <div class="ion-padding" *ngIf="accion !== 'ver'">
+        <ion-button expand="block" (click)="agregarFalla()">{{msgbtn}}</ion-button>
     </div>
 
 
