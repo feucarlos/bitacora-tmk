@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { FirmaDesfirmaPageRoutingModule } from './firma-desfirma-routing.module';
 
 import { FirmaDesfirmaPage } from './firma-desfirma.page';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FirmaDesfirmaPageRoutingModule
+    FirmaDesfirmaPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [FirmaDesfirmaPage]
 })

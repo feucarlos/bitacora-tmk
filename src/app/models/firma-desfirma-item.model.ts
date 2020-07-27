@@ -1,15 +1,17 @@
 export class FirmaDesfirmaItem{
     id: number;
+    fecha: string;
+    hora: string;
     desc: string;
-    fecha: Date;
     ymd: number;
-    hora?: number;
 
-    constructor(fecha: Date, desc?: string, hora?: number) {
+    constructor(fecha: string) {
+        const hoy = new Date();
         this.id = new Date().getTime();
-        if ( desc ) { this.desc = desc; }
-        if ( hora ) { this.hora = hora; };
-        this.fecha = fecha;
-        this.ymd = this.fecha.getFullYear() * 10000 + this.fecha.getMonth() * 100 + this.fecha.getDate();
+        this.desc = '';
+        this.hora = '15:00';
+        this.fecha = '1974-11-27';
+        this.ymd = hoy.getFullYear() * 10000 + hoy.getMonth() * 100 + hoy.getDate();
     }
+
 }

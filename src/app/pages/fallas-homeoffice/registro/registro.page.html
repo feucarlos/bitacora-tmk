@@ -48,15 +48,11 @@
 
         <ion-item>
             <ion-label position="floating">Descripción</ion-label>
-            <ion-textarea [(ngModel)]="item.desc" readonly="{{ readonly }}" autoGrow="true" placeholder="Describe la falla (luz, internet, Avaya...)" class="borde-sutil"></ion-textarea>
+            <ion-textarea [(ngModel)]="item.desc" readonly="{{ readonly }}" rows="15" placeholder="Describe la falla (luz, internet, Avaya...)" class="borde-sutil"></ion-textarea>
         </ion-item>
 
     </ion-list>
 
-    <div class="ion-padding" *ngIf="accion !== 'ver'">
+    <ion-item *ngIf="accion !== 'ver'">
         <ion-button expand="block" (click)="agregarFalla()">{{msgbtn}}</ion-button>
-    </div>
-
-
-
-</ion-content>
+    </ion-item>
