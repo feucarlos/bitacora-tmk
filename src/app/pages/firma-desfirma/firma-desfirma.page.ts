@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BitacoraService } from '../../services/bitacora.service';
 import { FirmaDesfirmaItem } from '../../models/firma-desfirma-item.model';
-import { AlertController } from '@ionic/angular';
-import { time } from 'console';
-
+import { AlertController, IonList } from '@ionic/angular';
 
 @Component({
   selector: 'app-firma-desfirma',
@@ -12,6 +10,7 @@ import { time } from 'console';
 })
 export class FirmaDesfirmaPage implements OnInit {
 
+  @ViewChild ( IonList ) lista: IonList;
   item: FirmaDesfirmaItem;
 
   constructor(public bitacora: BitacoraService,
@@ -32,8 +31,8 @@ export class FirmaDesfirmaPage implements OnInit {
   //   this.agregarFD( item )
   // }
 
-  async agregarFD( item?: FirmaDesfirmaItem ) {
-    
+  async agregarFD( item: FirmaDesfirmaItem, opcion?: string ) {
+
     let firma = new FirmaDesfirmaItem();
     if ( item ) { firma = item; }
 
@@ -61,17 +60,21 @@ export class FirmaDesfirmaPage implements OnInit {
         {
           text: 'Cancelar',
           role: 'cancel'
-          // handler: () => { console.log('Cancelar'); }
         },
         {
-          text: 'Agregar',
+          text: (opcion === 'editar' ? 'Actualizar' : 'Agregar'),
           handler: (data) => {
             firma.fecha = data.fecha;
             firma.hora = data.hora;
             firma.desc = data.desc;
-            firma.update();
-            console.log( firma.fecha, firma.hora, firma.ymd, firma.desc);
-            this.bitacora.agregarFirmaDesfirmas( firma );
+            firma.ymd = Number( firma.fecha.substr(0, 4)) * 10000 
+            + Number( firma.fecha.substr(5, 2) ) * 100 + Number( firma.fecha.substr(8, 2) );
+            if ( opcion === 'editar') {
+              this.bitacora.saveStorage( 'firmaDesfirmas' );
+            } else {
+              this.bitacora.agregarFirmaDesfirmas( firma );
+            }
+            this.lista.closeSlidingItems();
           }
         }
       ]

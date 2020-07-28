@@ -26,7 +26,4 @@ export class FechaHoraUniversal{
         return Number( this.hora.substr(0, 2) ) * 60 +  Number( this.hora.substr(3, 2 ) );
     }
 
-    update(){
-        this.ymd = Number( this.fecha.substr(0, 4)) * 10000 + Number( this.fecha.substr(5, 2) ) * 100 + Number( this.fecha.substr(8, 2) );
-    }
 }
