@@ -143,7 +143,7 @@ export class BitacoraService {
     this.firmaDesfirmas.sort( (a, b) => a.ymd - b.ymd );
     this.saveStorage( 'firmaDesfirmas' );
   }
-  borrarFirmaDesfirmaItem(firmaDesfirma: FirmaDesfirmaItem){
+  borrarFirmaDesfirma(firmaDesfirma: FirmaDesfirmaItem){
     this.firmaDesfirmas = this.firmaDesfirmas.filter (listaData => listaData.id !== firmaDesfirma.id);
     this.saveStorage('firmaDesfirmas');
   }

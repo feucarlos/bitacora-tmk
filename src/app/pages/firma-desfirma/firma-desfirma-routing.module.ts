@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: FirmaDesfirmaPage
+  },  {
+    path: 'admin-fd',
+    loadChildren: () => import('./admin-fd/admin-fd.module').then( m => m.AdminFdPageModule)
   }
+
 ];
 
 @NgModule({

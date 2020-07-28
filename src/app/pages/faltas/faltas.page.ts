@@ -42,7 +42,7 @@ export class FaltasPage implements OnInit {
         {
           text: 'Agregar',
           handler: (data) => {
-            if( !data.fecha.length ) { return; }
+            if ( !data.fecha.length ) { return; }
             this.bitacora.agregarFalta( data.fecha, data.desc );
           }
         }
@@ -52,7 +52,7 @@ export class FaltasPage implements OnInit {
   }
 
   borrarFalta(item: FaltaItem) {
-    this.bitacora.borrarFalta( item);
+    this.bitacora.borrarFalta( item );
   }
 
   async editarFalta(item: FaltaItem) {
@@ -74,7 +74,7 @@ export class FaltasPage implements OnInit {
       {
         text: 'Aceptar',
         handler: (data) => {
-          if( !data.desc ) { return; }
+          if ( !data.desc ) { return; }
           item.desc = data.desc;
           this.bitacora.saveStorage('faltas');
           this.lista.closeSlidingItems();

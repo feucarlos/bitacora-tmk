@@ -17,7 +17,7 @@
                 <ion-label>
                     <h2 *ngIf="item.desc">{{ item.desc | shortDesc }}</h2>
                     <p>{{ item.fecha | date:"EEEE, MMMM dd" }}</p>
-                    <p>Hora {{ item.hora | horadeldia }}</p>
+                    <p>Hora {{ item.hora }}</p>
                 </ion-label>
             </ion-item>
 
@@ -30,7 +30,7 @@
 
             <ion-item-options side="end">
                 <ion-item-option color="secondary">
-                    <ion-icon slot="icon-only" name="create-outline" (click)="editarItem(item)">
+                    <ion-icon slot="icon-only" name="create-outline" (click)="agregarFD( item )">
                     </ion-icon>
                 </ion-item-option>
             </ion-item-options>
