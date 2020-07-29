@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { IncapacidadesPageRoutingModule } from './incapacidades-routing.module';
 
 import { IncapacidadesPage } from './incapacidades.page';
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    IncapacidadesPageRoutingModule
+    IncapacidadesPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [IncapacidadesPage]
 })

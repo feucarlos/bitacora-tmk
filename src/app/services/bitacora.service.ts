@@ -152,9 +152,9 @@ export class BitacoraService {
     this.incapacidades.sort( (a, b) => a.ymd - b.ymd );
     this.saveStorage( 'incapacidades' );
   }
-  borrarincapacidad(descanso: DescansoItem){
-    this.descansos = this.descansos.filter (listaData => listaData.id !== descanso.id);
-    this.saveStorage('descansos');
+  borrarIncapacidad(inca: IncapacidadItem){
+    this.incapacidades = this.incapacidades.filter (listaData => listaData.id !== inca.id);
+    this.saveStorage('incapacidades');
   }
   agregarVaca( vaca: VacacionesItem ){
     this.vacaciones.push( vaca );

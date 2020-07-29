@@ -9,11 +9,37 @@
 </ion-header>
 
 <ion-content>
+
     <ion-list>
 
+        <ion-item-sliding *ngFor="let item of bitacora.incapacidades">
+            <ion-item class="animated FadeInDown">
+                <ion-label>
+                    <h2 *ngIf="item.desc">{{ item.desc | shortDesc }}</h2>
+                    <p>{{ item.fecha | date:"EEEE, MMMM dd" }}</p>
+                </ion-label>
+                <ion-note slot="end">{{ (item.dias > 1 ) ? item.dias + ' días' : item.dias + ' día'}}</ion-note>
+            </ion-item>
+
+            <ion-item-options side="start">
+                <ion-item-option color="danger">
+                    <ion-icon slot="icon-only" name="trash" (click)="borrarItem( item )">
+                    </ion-icon>
+                </ion-item-option>
+            </ion-item-options>
+
+            <ion-item-options side="end">
+                <ion-item-option color="secondary">
+                    <ion-icon slot="icon-only" name="create-outline" (click)="agregarInca( item, 'editar' )">
+                    </ion-icon>
+                </ion-item-option>
+            </ion-item-options>
+        </ion-item-sliding>
+
     </ion-list>
+
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button (click)="agregarIncapacidad()">
+        <ion-fab-button (click)="agregarInca()">
             <ion-icon name="add"></ion-icon>
         </ion-fab-button>
     </ion-fab>

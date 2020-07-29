@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { BitacoraService } from '../../services/bitacora.service';
 import { FirmaDesfirmaItem } from '../../models/firma-desfirma-item.model';
+import { BitacoraService } from '../../services/bitacora.service';
 import { AlertController, IonList } from '@ionic/angular';
 
 @Component({
@@ -31,7 +31,7 @@ export class FirmaDesfirmaPage implements OnInit {
   //   this.agregarFD( item )
   // }
 
-  async agregarFD( item: FirmaDesfirmaItem, opcion?: string ) {
+  async agregarFD( item?: FirmaDesfirmaItem, opcion?: string ) {
 
     let firma = new FirmaDesfirmaItem();
     if ( item ) { firma = item; }
