@@ -26,4 +26,8 @@ export class FechaHoraUniversal{
         return Number( this.hora.substr(0, 2) ) * 60 +  Number( this.hora.substr(3, 2 ) );
     }
 
+    year(){
+        return Number(this.fecha.substr(0, 4));
+    }
+
 }

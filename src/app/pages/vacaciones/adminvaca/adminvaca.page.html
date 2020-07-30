@@ -1,0 +1,30 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/tabs/tab2/vacaciones"></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{ titulo }}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-list>
+        <ion-item>
+            <ion-label>Periodo ({{ item.periodo | periodo }})</ion-label>
+            <ion-datetime [(ngModel)]="item.periodo" picker-format="YYYY" readonly="{{readonly}}" displayFormat="YYYY"></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Fecha de inicio</ion-label>
+            <ion-datetime [(ngModel)]="item.fecha" readonly="{{readonly}}" placeholder="Select Date" displayFormat="DDD. MMM DD, YYYY" dayShortNames="dom, lun, mar, mie, jue, vie, sab, dom" monthShortNames="ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic"></ion-datetime>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Dias a disfrutar</ion-label>
+            <ion-note slot="end" color="dark">{{item.dias}}</ion-note>
+        </ion-item>
+
+    </ion-list>
+
+</ion-content>

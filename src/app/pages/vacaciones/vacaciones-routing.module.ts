@@ -7,6 +7,14 @@ const routes: Routes = [
   {
     path: '',
     component: VacacionesPage
+  },
+  {
+    path: ':do/:id',
+    loadChildren: () => import('./adminvaca/adminvaca.module').then( m => m.AdminvacaPageModule)
+  },
+  {
+    path: ':do',
+    loadChildren: () => import('./adminvaca/adminvaca.module').then( m => m.AdminvacaPageModule)
   }
 ];
 
