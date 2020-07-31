@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BitacoraService } from '../../../services/bitacora.service';
 import { ActivatedRoute } from '@angular/router';
 import { VacacionesItem } from '../../../models/vacaciones-item.model';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-adminvaca',
@@ -19,38 +20,45 @@ export class AdminvacaPage implements OnInit {
   msgbtn: string;
   periodo: string;
   periodoIni: string;
+  anioPeriodoValues: string;
   yearValues: string;
-  accion: string;
   dayShortNames: string;
   monthShortNames: string;
 
   constructor(public bitacora: BitacoraService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private location: Location) {
 
     this.todo = this.route.snapshot.paramMap.get('do');
-    
+    this.id = Number(this.route.snapshot.paramMap.get('id'));
+
     if ( this.todo === 'add'){
       this.titulo = 'Agregar periodo';
       this.item = new VacacionesItem();
       this.readonly = false;
       this.msgbtn = 'Agregar';
     } else {
-      this.id = Number(this.route.snapshot.paramMap.get('id'));
+      console.log(this.id);
       this.item = this.bitacora.vacaciones.find( data => data.id === this.id );
-      this.accion = 'add';
-      // TODO si no existe el registro regresar a la página anterior
+      console.log(this.item);
+
+      if ( !this.item ){
+        this.bitacora.presentToast('no se encontró registro');
+        this.item = new VacacionesItem();
+      }
+
     }
 
-    this.dayShortNames = this.item.dayShortNames();
-    this.monthShortNames = this.item.monthShortNames();
+    this.dayShortNames = 'dom, lun, mar, mie, jue, vie, sab, dom';
+    this.monthShortNames = 'ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic';
 
     this.periodo = this.item.periodo.substr( 7, 4 );
+    this.anioPeriodoValues = this.item.fecha.substr(0, 4) + ',' + (Number(this.item.fecha.substr(0, 4)) - 1) ;
     this.updatePeriodo();
 
     if ( this.todo === 'ver'){
       this.readonly = true;
       this.titulo = 'Información del periodo';
-      this.accion = 'ver';
     } else if ( this.todo === 'edit'){
       this.msgbtn = 'Actualizar';
       this.readonly = false;
@@ -73,8 +81,12 @@ export class AdminvacaPage implements OnInit {
     this.item.fecha = this.item.fecha.substr(0, 10);
     this.item.fechaFin = this.item.fechaFin.substr(0, 10);
 
-    this.item.ymd = this.item.dateToYmd( this.item.fecha );
-    this.item.ymdFin = this.item.dateToYmd( this.item.fechaFin );
+    this.item.ymd = Number(this.item.fecha.substr(0, 4)) * 10000
+                  + (Number(this.item.fecha.substr(5, 2)) + 1) * 100
+                  + Number(this.item.fecha.substr(8, 2));
+    this.item.ymdFin = Number(this.item.fechaFin.substr(0, 4)) * 10000
+    + (Number(this.item.fechaFin.substr(5, 2)) + 1) * 100
+    + Number(this.item.fechaFin.substr(8, 2));
 
     const fini = new Date( this.item.fecha ).getTime();
     const ffin = new Date( this.item.fechaFin ).getTime();
@@ -85,9 +97,14 @@ export class AdminvacaPage implements OnInit {
       return;
     }
 
-    console.log(this.item);
-    
+    if ( this.todo === 'add' ){
+      this.bitacora.agregarVaca( this.item );
+      this.bitacora.presentToast('Registro agregado');
+    } else if ( this.todo === 'edit' ){
+      this.bitacora.saveStorage( 'vacaciones' );
+    }
 
+    this.location.back();
   }
 
 }

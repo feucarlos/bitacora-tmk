@@ -12,7 +12,7 @@
     <ion-list>
         <ion-item>
             <ion-label>Periodo</ion-label>
-            <ion-datetime [(ngModel)]="periodo" picker-format="YYYY" readonly="{{readonly}}" displayFormat="{{ periodoIni }} - YYYY" (ionChange)="updatePeriodo()"></ion-datetime>
+            <ion-datetime [(ngModel)]="periodo" picker-format="YYYY" readonly="{{readonly}}" displayFormat="{{ periodoIni }} - YYYY" (ionChange)="updatePeriodo()" yearValues="{{ anioPeriodoValues }}"></ion-datetime>
         </ion-item>
 
         <ion-item>
@@ -29,12 +29,13 @@
 
         <ion-item>
             <ion-label position="floating">Nota</ion-label>
-            <ion-input [(ngModel)]="item.desc" place-holder="Agregar nota"></ion-input>
+            <ion-input [(ngModel)]="item.desc" place-holder="Agregar nota" readonly="{{readonly}}"></ion-input>
         </ion-item>
 
-        <ion-item *ngIf="accion !=='ver' ">
+        <ion-item *ngIf="todo !=='ver' ">
             <ion-button expand="full " (click)="agregarVaca() ">{{ msgbtn }}</ion-button>
         </ion-item>
+
 
     </ion-list>
 

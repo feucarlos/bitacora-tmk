@@ -13,7 +13,7 @@
     <ion-list>
 
         <ion-item-sliding *ngFor="let item of bitacora.vacaciones">
-            <ion-item class="animated FadeInDown">
+            <ion-item class="animated FadeInDown" (click)="adminItem( item, 'ver' )">
                 <ion-label>
                     <h2 *ngIf="item.desc">{{ item.desc | shortDesc }}</h2>
                     <p>{{ item.fecha | date:"EEEE, MMMM dd" }}</p>
@@ -30,7 +30,7 @@
 
             <ion-item-options side="end">
                 <ion-item-option color="secondary">
-                    <ion-icon slot="icon-only" name="create-outline" (click)="agregarItem( item, 'editar' )">
+                    <ion-icon slot="icon-only" name="create-outline" (click)="adminItem( item, 'edit' )">
                     </ion-icon>
                 </ion-item-option>
             </ion-item-options>
@@ -39,7 +39,7 @@
     </ion-list>
 
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button (click)="agregarItem()">
+        <ion-fab-button (click)="adminItem()">
             <ion-icon name="add"></ion-icon>
         </ion-fab-button>
     </ion-fab>
