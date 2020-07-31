@@ -26,8 +26,19 @@ export class FechaHoraUniversal{
         return Number( this.hora.substr(0, 2) ) * 60 +  Number( this.hora.substr(3, 2 ) );
     }
 
-    year(){
+    getYear(){
         return Number(this.fecha.substr(0, 4));
     }
+
+    dateToYmd(fecha: string){
+        let num = Number(fecha.substr(0, 4)) * 10000;
+        num = num + (Number(fecha.substr(5, 2)) + 1) * 100 + Number(fecha.substr(8, 2));
+        return num;
+    }
+
+    dayShortNames() { return 'dom, lun, mar, mie, jue, vie, sab, dom'; }
+
+    monthShortNames() { return 'ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic'; }
+
 
 }

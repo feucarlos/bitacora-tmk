@@ -11,18 +11,29 @@
 
     <ion-list>
         <ion-item>
-            <ion-label>Periodo ({{ item.periodo | periodo }})</ion-label>
-            <ion-datetime [(ngModel)]="item.periodo" picker-format="YYYY" readonly="{{readonly}}" displayFormat="YYYY"></ion-datetime>
+            <ion-label>Periodo</ion-label>
+            <ion-datetime [(ngModel)]="periodo" picker-format="YYYY" readonly="{{readonly}}" displayFormat="{{ periodoIni }} - YYYY" (ionChange)="updatePeriodo()"></ion-datetime>
         </ion-item>
 
         <ion-item>
             <ion-label>Fecha de inicio</ion-label>
-            <ion-datetime [(ngModel)]="item.fecha" readonly="{{readonly}}" placeholder="Select Date" displayFormat="DDD. MMM DD, YYYY" dayShortNames="dom, lun, mar, mie, jue, vie, sab, dom" monthShortNames="ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic"></ion-datetime>
+            <ion-datetime [(ngModel)]="item.fecha" readonly="{{readonly}}" displayFormat="DDD. MMM DD, YYYY" [dayShortNames]="dayShortNames" [monthShortNames]="monthShortNames" yearValues="{{ yearValues }} ">
+            </ion-datetime>
         </ion-item>
 
         <ion-item>
-            <ion-label>Dias a disfrutar</ion-label>
-            <ion-note slot="end" color="dark">{{item.dias}}</ion-note>
+            <ion-label>Fecha final</ion-label>
+            <ion-datetime [(ngModel)]="item.fechaFin" readonly="{{readonly}}" displayFormat="DDD. MMM DD, YYYY" [dayShortNames]="dayShortNames" [monthShortNames]="monthShortNames" yearValues="{{ yearValues }} ">
+            </ion-datetime>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Nota</ion-label>
+            <ion-input [(ngModel)]="item.desc" place-holder="Agregar nota"></ion-input>
+        </ion-item>
+
+        <ion-item *ngIf="accion !=='ver' ">
+            <ion-button expand="full " (click)="agregarVaca() ">{{ msgbtn }}</ion-button>
         </ion-item>
 
     </ion-list>

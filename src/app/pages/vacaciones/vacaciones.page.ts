@@ -13,9 +13,6 @@ export class VacacionesPage implements OnInit {
   constructor(public bitacora: BitacoraService,
               private route: Router) {
     const vaca = new VacacionesItem();
-    console.log( vaca.periodo );
-    console.log( vaca.fecha );
-
   }
 
   ngOnInit() {
