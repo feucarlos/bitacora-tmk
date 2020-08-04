@@ -37,7 +37,12 @@ const routes: Routes = [
   {
     path: 'descansos',
     loadChildren: () => import('../descansos/descansos.module').then( m => m.DescansosPageModule)
+  },
+  {
+    path: 'lista/:seccion',
+    loadChildren: () => import('./lista/lista.module').then( m => m.ListaPageModule)
   }
+
 ];
 
 @NgModule({

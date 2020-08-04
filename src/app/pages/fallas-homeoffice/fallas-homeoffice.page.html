@@ -20,11 +20,9 @@
                 <ion-label>
                     <p *ngIf="item.desc"><strong>{{ item.desc | shortDesc }}</strong></p>
                     <p>{{ item.fecha | date:"EEEE, MMMM dd" }}</p>
-                    <p>Falla de <strong>{{ item.hInicio }}</strong> a <strong>{{ item.hFinal }}</strong> ({{ item.tiempo | duracion }})
-                    </p>
+                    <p>Falla de <strong>{{ item.hInicio }}</strong> a <strong>{{ item.hFinal }}</strong> ({{ item.tiempo | duracion }})</p>
                 </ion-label>
                 <ion-icon slot="end" name="{{ item.lugar === 'Tec' ? 'business-outline':'home-outline' }}"></ion-icon>
-
             </ion-item>
 
             <ion-item-options side="start">

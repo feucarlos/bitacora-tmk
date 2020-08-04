@@ -14,12 +14,12 @@ import { VacacionesItem } from '../models/vacaciones-item.model';
 })
 export class BitacoraService {
 
-  faltas: FaltaItem[] = [];
   calidadLista: CalidadItem[] = [];
   capacitacion: CapaItem[] = [];
   descansos: DescansoItem[] = [];
-  fallasHomeOffice: FallaHomeOfficeItem[] = [];
+  faltas: FaltaItem[] = [];
   firmaDesfirmas: FirmaDesfirmaItem[] = [];
+  fallasHomeOffice: FallaHomeOfficeItem[] = [];
   incapacidades: IncapacidadItem[] = [];
   vacaciones: VacacionesItem[] = [];
 

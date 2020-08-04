@@ -1,0 +1,52 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/tabs/tab2"></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{ seccion }}</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-list>
+
+        <ion-item-sliding *ngFor="let item of registro">
+            <ion-item class="animated FadeInDown" (click)="verItem( item.id )">
+                <ion-label>
+                    <p *ngIf="item.desc"><strong>{{ item.desc | shortDesc }}</strong></p>
+                    <p color="dark"> {{ item.fecha | date:'fullDate' }} </p>
+                    <p *ngIf="seccion === 'homeOffice'">De <strong>{{ item.hInicio }}</strong> a <strong>{{ item.hFinal }}</strong> ({{ item.tiempo | duracion }})</p>
+                </ion-label>
+                <ion-icon *ngIf="seccion === 'homeOffice'" slot="end" name="{{ item.lugar === 'Tec' ? 'business-outline':'home-outline' }}"></ion-icon>
+
+                <ion-note *ngIf="seccion === 'calidad'" slot="end" color="dark"> Cal: {{ item.calificacion }} </ion-note>
+                <ion-note *ngIf="seccion === 'capacitacion'" slot="end" color="dark">Duración<br>{{ (item.hFinal - item.hInicio) | duracion }}
+                </ion-note>
+            </ion-item>
+
+            <ion-item-options side="start">
+                <ion-item-option color="danger">
+                    <ion-icon slot="icon-only" name="trash" (click)="borrarItem( item.id )">
+                    </ion-icon>
+                </ion-item-option>
+            </ion-item-options>
+
+            <ion-item-options side="end">
+                <ion-item-option color="secondary">
+                    <ion-icon slot="icon-only" name="create-outline" (click)="editarItem( item.id )">
+                    </ion-icon>
+                </ion-item-option>
+            </ion-item-options>
+        </ion-item-sliding>
+
+    </ion-list>
+
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="agregarItem( seccion )">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+</ion-content>
