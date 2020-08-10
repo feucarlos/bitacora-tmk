@@ -8,6 +8,7 @@ import { FallaHomeOfficeItem } from '../models/falla-home-office-item.model';
 import { FirmaDesfirmaItem } from '../models/firma-desfirma-item.model';
 import { IncapacidadItem } from '../models/incapacidad-item.model';
 import { VacacionesItem } from '../models/vacaciones-item.model';
+import { tr } from 'date-fns/locale';
 
 @Injectable({
   providedIn: 'root'
@@ -28,13 +29,13 @@ export class BitacoraService {
   }
 
   loadStorage(){
-    if ( localStorage.getItem('faltas') ){
-      this.faltas = JSON.parse(localStorage.getItem('faltas'));
-    } else { this.faltas = []; }
-
     if ( localStorage.getItem('calidad') ){
       this.calidadLista = JSON.parse(localStorage.getItem('calidad'));
     } else { this.calidadLista = []; }
+
+    if ( localStorage.getItem('faltas') ){
+      this.faltas = JSON.parse(localStorage.getItem('faltas'));
+    } else { this.faltas = []; }
 
     if ( localStorage.getItem('capacitacion') ){
       this.capacitacion = JSON.parse(localStorage.getItem('capacitacion'));

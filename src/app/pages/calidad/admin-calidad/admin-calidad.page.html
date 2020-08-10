@@ -12,16 +12,22 @@
     <ion-card>
         <ion-item>
             <ion-icon name="{{ accionIco }}" slot="start"></ion-icon>
-            <ion-label>Editar descripción</ion-label>
-            <ion-button fill="outline" slot="end" (click)="saveChanges( )" *ngIf="accion==='editar'">Guardar</ion-button>
+            <ion-label>Calidad</ion-label>
+            <ion-button fill="outline" slot="end" (click)="saveChanges()" *ngIf="accion==='editar' || accion==='add'">Guardar</ion-button>
         </ion-item>
 
-        <ion-card-content *ngIf="accion === 'ver'">
-            <ion-textarea value="{{ item.desc }}" autoGrow="true" [(ngModel)]="item.desc" readonly="true"></ion-textarea>
-        </ion-card-content>
+        <ion-item>
+            <ion-label>Fecha de monitoreo</ion-label>
+            <ion-datetime [(ngModel)]="item.fecha" readonly="{{readonly}}" displayFormat="DDD. MMM DD, YYYY" (ionChange)="cambioFecha()" [dayShortNames]="dayShortNames" [monthShortNames]="monthShortNames" [yearValues]="yearValues"></ion-datetime>
+        </ion-item>
 
-        <ion-card-content *ngIf="accion === 'editar'">
-            <ion-textarea value="{{ item.desc }}" autoGrow="true" [(ngModel)]="item.desc" placeholder="Agregar descripción"></ion-textarea>
+        <ion-item>
+            <ion-label>Calificación</ion-label>
+            <ion-input type="number" readonly="{{readonly}}" [(ngModel)]="item.calificacion" class="ion-text-end" min="0" max="10"></ion-input>
+        </ion-item>
+
+        <ion-card-content>
+            <ion-textarea value="{{ item.desc }}" readonly="{{readonly}}" [(ngModel)]="item.desc" rows="15" placeholder="Agregar descripción"></ion-textarea>
         </ion-card-content>
 
     </ion-card>
