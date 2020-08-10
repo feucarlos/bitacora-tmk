@@ -7,17 +7,7 @@ const routes: Routes = [
   {
     path: '',
     component: CalidadPage
-  },
-  {
-    path: ':do/:id',
-    loadChildren: () => import('./calidad.module').then( m => m.CalidadPageModule)
-  },
-  {
-    path: ':do',
-    loadChildren: () => import('./calidad.module').then( m => m.CalidadPageModule)
   }
-
-
 ];
 
 @NgModule({

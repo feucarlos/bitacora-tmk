@@ -1,88 +1,78 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { CalidadItem } from '../../models/calidad-item.model';
-import { AlertController, IonList } from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { BitacoraService } from '../../services/bitacora.service';
-import { Router } from '@angular/router';
+import { Location } from '@angular/common';
+import { CalidadItem } from '../../models/calidad-item.model';
 
 @Component({
-  selector: 'app-calidad',
+  selector: 'app-admin-calidad',
   templateUrl: './calidad.page.html',
   styleUrls: ['./calidad.page.scss'],
 })
 export class CalidadPage implements OnInit {
 
-  @ViewChild( IonList ) listaItem: IonList;
+  accion = '';
+  id: number;
+  accionIco = '';
+  item: CalidadItem;
+  dayShortNames: string;
+  monthShortNames: string;
+  readonly: boolean;
+  yearValues: string;
 
-  constructor( public bitacora: BitacoraService,
-               public alertController: AlertController,
-               public route: Router) {}
+
+  constructor(public bitacora: BitacoraService,
+              private route: ActivatedRoute,
+              private location: Location) {
+
+    this.readonly = false;
+
+    this.accion = this.route.snapshot.paramMap.get('do');
+    if ( this.accion === 'ver' ) {
+      this.accionIco = 'information-circle-outline';
+      this.readonly = true;
+    }
+
+    if ( this.accion === 'editar' ) {
+      this.accionIco = 'create-outline';
+    }
+
+    if ( this.accion === 'add'){
+      this.item = new CalidadItem();
+      this.accionIco = 'create-outline';
+    } else {
+      this.id = Number(this.route.snapshot.paramMap.get('id'));
+      this.item = this.bitacora.calidadLista.find( listaData => listaData.id === this.id);
+    }
+
+    this.dayShortNames = 'dom, lun, mar, mie, jue, vie, sab, dom';
+    this.monthShortNames = 'ene, feb, mar, abr, may, jun, jul, ago, sep, oct, nov, dic';
+
+  }
 
   ngOnInit() {
   }
 
-  async agregarCalificacion() {
-    const alert = await this.alertController.create({
-      header: 'Agregar calificación',
-      // subHeader: 'Subtitle',
-      inputs: [
-      {
-        name: 'fecha',
-        type: 'date'
-      },
-      {
-        name: 'calificacion',
-        type: 'number',
-        min: '0',
-        max: '10',
-        placeholder: 'Calificación'
-      },
-      {
-        name: 'desc',
-        type: 'textarea',
-        placeholder: 'Descripción (opcional)'
-      }
-      ],
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel'
-          // handler: () => { console.log('Cancelar'); }
-        },
-        {
-          text: 'Agregar',
-          handler: (data) => {
-            if ( !data.fecha.length ) { return; }
-            if ( !data.calificacion ) { return; }
-            this.validaCalidad( data.fecha, data.calificacion, data.desc );
-          }
-        }
-      ]
-    });
-    await alert.present();
-  }
-
-  borrarCalidad(item: CalidadItem) {
-    this.bitacora.borrarCalidad( item );
-  }
-
-  async editarCalidad(item: CalidadItem) {
-    this.listaItem.closeSlidingItems();
-    this.route.navigate( ['/tabs/tab2/calidad', 'editar', item.id] );
-  }
-
-  validaCalidad(fecha: Date, calificacion: number, desc: string ){
-    // console.log(`Validando ${ fecha}, ${ calificacion }, ${ desc }`);
-    const nFecha = new Date(fecha);
-    nFecha.setTime( nFecha.getTime() + nFecha.getTimezoneOffset() * 60 * 1000 );
-    if ( calificacion < 0 || calificacion > 10 ) {
-      this.bitacora.presentToast('Error en calificación');
+  saveChanges(){
+    if (this.item.calificacion > 10 || this.item.calificacion < 0){
+      this.bitacora.presentToast('Revisa la calificación');
       return;
     }
-    this.bitacora.agregarCalidad( nFecha, calificacion, desc);
+
+    if ( this.accion === 'add'){
+      this.bitacora.agregarCalidad( this.item );
+    } else {
+      this.bitacora.saveStorage( 'calidad' );
+    }
+
+    this.bitacora.presentToast('Bitacora actualizada');
+    this.location.back();
+
   }
 
-  verDesc( item: CalidadItem ){
-    if ( !item.desc ){ return; }
-    this.route.navigate( ['/tabs/tab2/calidad', 'ver', item.id] );
+  cambioFecha(){
+    const fecha = new Date( this.item.fecha );
+    this.item.ymd = fecha.getFullYear() * 10000 + fecha.getMonth() * 100 + 100 + fecha.getDate();
   }
+
 }

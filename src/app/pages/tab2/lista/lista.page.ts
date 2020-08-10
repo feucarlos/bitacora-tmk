@@ -1,15 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { BitacoraService } from '../../../services/bitacora.service';
-import { ActivatedRoute } from '@angular/router';
-import { CalidadItem } from '../../../models/calidad-item.model';
-import { CapaItem } from '../../../models/capa-item.model';
-import { DescansoItem } from '../../../models/descanso-item.model';
-import { FaltaItem } from '../../../models/falta-item.model';
-import { FallaHomeOfficeItem } from 'src/app/models/falla-home-office-item.model';
-import { FirmaDesfirmaItem } from '../../../models/firma-desfirma-item.model';
-import { IncapacidadItem } from '../../../models/incapacidad-item.model';
-import { VacacionesItem } from 'src/app/models/vacaciones-item.model';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { IonList } from '@ionic/angular';
 
 @Component({
   selector: 'app-lista',
@@ -18,16 +11,20 @@ import { Location } from '@angular/common';
 })
 export class ListaPage implements OnInit {
 
+  @ViewChild ( IonList ) lista: IonList;
+
   seccion: string;
   registro: any;
+  item: any;
   // registro: CalidadItem[] | CapaItem[] | DescansoItem[] | FaltaItem[] | FallaHomeOfficeItem[]
   //           | FaltaItem[] | FirmaDesfirmaItem[] | IncapacidadItem[] | VacacionesItem[];
 
   constructor(public bitacora: BitacoraService,
-              private route: ActivatedRoute,
-              private location: Location) {
+              private activatedRoute: ActivatedRoute,
+              private location: Location,
+              private router: Router) {
 
-    this.seccion = this.route.snapshot.paramMap.get('seccion');
+    this.seccion = this.activatedRoute.snapshot.paramMap.get('seccion');
     switch ( this.seccion ){
       case 'calidad': this.registro = this.bitacora.calidadLista;
                       break;
@@ -47,14 +44,15 @@ export class ListaPage implements OnInit {
                          break;
       default: this.location.back();
     }
-    console.log(this.registro.fecha);
-    
+
   }
 
   ngOnInit() {
   }
 
-  verItem( id: number){}
+  verItem( id: number){
+    this.router.navigate( [ '/tabs/tab2/', 'calidad', 'ver', id ]);
+  }
 
   borrarItem( id: number ){
     this.registro =  this.registro.filter( listaData => listaData.id !== id);
@@ -81,9 +79,34 @@ export class ListaPage implements OnInit {
   }
 
   editarItem( id: number ){
+    this.lista.closeSlidingItems();
+    if (this.seccion === 'calidad') {
+      this.router.navigate( [ '/tabs/tab2/calidad/editar', id ]);
+    }
+
 
   }
 
-  agregarItem(){}
+  agregarItem(){
+    switch ( this.seccion ){
+      case 'calidad': this.router.navigateByUrl('/tabs/tab2/calidad/add');
+                      break;
+      case 'capacitacion': this.registro = this.bitacora.capacitacion;
+                           break;
+      case 'descansos': this.registro = this.bitacora.descansos;
+                        break;
+      case 'homeOffice': this.registro = this.bitacora.fallasHomeOffice;
+                         break;
+      case 'faltas': this.registro = this.bitacora.faltas;
+                     break;
+      case 'firma': this.registro = this.bitacora.firmaDesfirmas;
+                    break;
+      case 'incapacidades': this.registro = this.bitacora.incapacidades;
+                            break;
+      case 'vacaciones': this.registro = this.bitacora.vacaciones;
+                         break;
+    }
+
+  }
 
 }

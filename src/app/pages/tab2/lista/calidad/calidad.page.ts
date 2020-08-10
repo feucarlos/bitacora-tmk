@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BitacoraService } from '../../../services/bitacora.service';
 import { Location } from '@angular/common';
-import { CalidadItem } from '../../../models/calidad-item.model';
+import { BitacoraService } from '../../../../services/bitacora.service';
+import { CalidadItem } from '../../../../models/calidad-item.model';
 
 @Component({
-  selector: 'app-admin-calidad',
-  templateUrl: './admin-calidad.page.html',
-  styleUrls: ['./admin-calidad.page.scss'],
+  selector: 'app-calidad',
+  templateUrl: './calidad.page.html',
+  styleUrls: ['./calidad.page.scss'],
 })
-export class AdminCalidadPage implements OnInit {
+export class CalidadPage implements OnInit {
 
   accion = '';
   id: number;

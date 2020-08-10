@@ -6,43 +6,43 @@ const routes: Routes = [
   {
     path: '',
     component: Tab2Page,
-  },  {
-    path: 'faltas',
-    loadChildren: () => import('../faltas/faltas.module').then( m => m.FaltasPageModule)
   },
+  // {
+  //   path: 'faltas',
+  //   loadChildren: () => import('../faltas/faltas.module').then( m => m.FaltasPageModule)
+  // },
+  // {
+  //   path: 'firma-desfirma',
+  //   loadChildren: () => import('../firma-desfirma/firma-desfirma.module').then( m => m.FirmaDesfirmaPageModule)
+  // },
+  // {
+  //   path: 'incapacidades',
+  //   loadChildren: () => import('../incapacidades/incapacidades.module').then( m => m.IncapacidadesPageModule)
+  // },
+  // {
+  //   path: 'vacaciones',
+  //   loadChildren: () => import('../vacaciones/vacaciones.module').then( m => m.VacacionesPageModule)
+  // },
+  // {
+  //   path: 'fallas-homeoffice',
+  //   loadChildren: () => import('../fallas-homeoffice/fallas-homeoffice.module').then( m => m.FallasHomeofficePageModule)
+  // },
+  // {
+  //   path: 'capacitacion',
+  //   loadChildren: () => import('../capacitacion/capacitacion.module').then( m => m.CapacitacionPageModule)
+  // },
+  // // {
+  // //   path: 'calidad',
+  // //   loadChildren: () => import('../calidad/calidad.module').then( m => m.CalidadPageModule)
+  // // },
+  // {
+  //   path: 'descansos',
+  //   loadChildren: () => import('../descansos/descansos.module').then( m => m.DescansosPageModule)
+  // },
   {
-    path: 'firma-desfirma',
-    loadChildren: () => import('../firma-desfirma/firma-desfirma.module').then( m => m.FirmaDesfirmaPageModule)
-  },
-  {
-    path: 'incapacidades',
-    loadChildren: () => import('../incapacidades/incapacidades.module').then( m => m.IncapacidadesPageModule)
-  },
-  {
-    path: 'vacaciones',
-    loadChildren: () => import('../vacaciones/vacaciones.module').then( m => m.VacacionesPageModule)
-  },
-  {
-    path: 'fallas-homeoffice',
-    loadChildren: () => import('../fallas-homeoffice/fallas-homeoffice.module').then( m => m.FallasHomeofficePageModule)
-  },
-  {
-    path: 'capacitacion',
-    loadChildren: () => import('../capacitacion/capacitacion.module').then( m => m.CapacitacionPageModule)
-  },
-  {
-    path: 'calidad',
-    loadChildren: () => import('../calidad/calidad.module').then( m => m.CalidadPageModule)
-  },
-  {
-    path: 'descansos',
-    loadChildren: () => import('../descansos/descansos.module').then( m => m.DescansosPageModule)
-  },
-  {
-    path: 'lista/:seccion',
+    path: ':seccion',
     loadChildren: () => import('./lista/lista.module').then( m => m.ListaPageModule)
   }
-
 ];
 
 @NgModule({

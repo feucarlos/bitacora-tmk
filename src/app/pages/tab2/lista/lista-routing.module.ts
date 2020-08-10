@@ -7,7 +7,16 @@ const routes: Routes = [
   {
     path: '',
     component: ListaPage
+  },
+  {
+    path: ':do/:id',
+    loadChildren: () => import('../../calidad/calidad.module').then( m => m.CalidadPageModule)
+  },
+  {
+    path: ':do',
+    loadChildren: () => import('../../calidad/calidad.module').then( m => m.CalidadPageModule)
   }
+
 ];
 
 @NgModule({
