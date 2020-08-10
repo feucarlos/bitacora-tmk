@@ -23,8 +23,6 @@ export class BitacoraService {
   incapacidades: IncapacidadItem[] = [];
   vacaciones: VacacionesItem[] = [];
 
-
-
   constructor(public toastController: ToastController) {
     this.loadStorage();
   }
@@ -50,8 +48,8 @@ export class BitacoraService {
       this.fallasHomeOffice = JSON.parse(localStorage.getItem('fallasHomeOffice'));
     } else { this.fallasHomeOffice = []; }
 
-    if ( localStorage.getItem('firmaDesfirmas') ){
-      this.firmaDesfirmas = JSON.parse(localStorage.getItem('firmaDesfirmas'));
+    if ( localStorage.getItem('firmas') ){
+      this.firmaDesfirmas = JSON.parse(localStorage.getItem('firmas'));
     } else { this.firmaDesfirmas = []; }
 
     if ( localStorage.getItem('incapacidades') ){
@@ -64,15 +62,16 @@ export class BitacoraService {
 }
 
   saveStorage(key: string){
-    // TODO: cambiar a switch cuando esten todas las opciones
-    if (key === 'faltas') { localStorage.setItem('faltas', JSON.stringify(this.faltas)); }
+
     if (key === 'calidad') { localStorage.setItem('calidad', JSON.stringify(this.calidadLista)); }
     if (key === 'capacitacion') { localStorage.setItem('capacitacion', JSON.stringify(this.capacitacion)); }
     if (key === 'descansos') { localStorage.setItem('descansos', JSON.stringify(this.descansos)); }
-    if (key === 'fallasHomeOffice') { localStorage.setItem('fallasHomeOffice', JSON.stringify(this.fallasHomeOffice)); }
-    if (key === 'firmaDesfirmas') { localStorage.setItem('firmaDesfirmas', JSON.stringify(this.firmaDesfirmas)); }
+    if (key === 'homeOffice') { localStorage.setItem('fallasHomeOffice', JSON.stringify(this.fallasHomeOffice)); }
+    if (key === 'faltas') { localStorage.setItem('faltas', JSON.stringify(this.faltas)); }
+    if (key === 'firmas') { localStorage.setItem('firmas', JSON.stringify(this.firmaDesfirmas)); }
     if (key === 'incapacidades') { localStorage.setItem('incapacidades', JSON.stringify(this.incapacidades)); }
     if (key === 'vacaciones') { localStorage.setItem('vacaciones', JSON.stringify(this.vacaciones)); }
+
   }
 
   // TODO Homologar funciones que reciban como argumento el modelo
@@ -101,9 +100,8 @@ export class BitacoraService {
     this.saveStorage( 'faltas' );
   }
 
-  agregarCalidad(fecha: Date, calificacion: number, desc: string){
-    const tmp =  new CalidadItem(fecha, calificacion, desc);
-    this.calidadLista.push(tmp);
+  agregarCalidad(item: CalidadItem){
+    this.calidadLista.push( item );
     this.calidadLista.sort( (a, b) => a.ymd - b.ymd );
     this.saveStorage('calidad');
   }
@@ -132,20 +130,20 @@ export class BitacoraService {
   agregarfallaHomeOffice( fallaHomeOffice: FallaHomeOfficeItem ){
     this.fallasHomeOffice.push( fallaHomeOffice );
     this.fallasHomeOffice.sort( (a, b) => a.ymd - b.ymd );
-    this.saveStorage( 'fallasHomeOffice' );
+    this.saveStorage( 'homeOffice' );
   }
   borrarFallaHomeOffice(fallaHomeOffice: FallaHomeOfficeItem){
     this.fallasHomeOffice = this.fallasHomeOffice.filter (listaData => listaData.id !== fallaHomeOffice.id);
-    this.saveStorage('fallasHomeOffice');
+    this.saveStorage('homeOffice');
   }
   agregarFirmaDesfirmas( firmaDesfirma: FirmaDesfirmaItem ){
     this.firmaDesfirmas.push( firmaDesfirma );
     this.firmaDesfirmas.sort( (a, b) => a.ymd - b.ymd );
-    this.saveStorage( 'firmaDesfirmas' );
+    this.saveStorage( 'firmas' );
   }
   borrarFirmaDesfirma(firmaDesfirma: FirmaDesfirmaItem){
     this.firmaDesfirmas = this.firmaDesfirmas.filter (listaData => listaData.id !== firmaDesfirma.id);
-    this.saveStorage('firmaDesfirmas');
+    this.saveStorage('firmas');
   }
   agregarIncapacidad( incapacidad: IncapacidadItem ){
     this.incapacidades.push( incapacidad );
